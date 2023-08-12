@@ -1,10 +1,4 @@
-"""
-Training of WGAN-GP
 
-Programmed by Aladdin Persson <aladdin.persson at hotmail dot com>
-* 2020-11-01: Initial coding
-* 2022-12-20: Small revision of code, checked that it works with latest PyTorch version
-"""
 
 import torch
 import torch.nn as nn
@@ -23,7 +17,7 @@ device = "cuda" if torch.cuda.is_available() else "cpu"
 LEARNING_RATE = 1e-4
 BATCH_SIZE = 64
 IMAGE_SIZE = 64
-CHANNELS_IMG = 1
+CHANNELS_IMG = 3
 Z_DIM = 100
 NUM_EPOCHS = 100
 FEATURES_CRITIC = 16
@@ -41,9 +35,9 @@ transforms = transforms.Compose(
     ]
 )
 
-dataset = datasets.MNIST(root="dataset/", transform=transforms, download=True)
+#dataset = datasets.MNIST(root="dataset/", transform=transforms, download=True)
 # comment mnist above and uncomment below for training on CelebA
-# dataset = datasets.ImageFolder(root="celeb_dataset", transform=transforms)
+dataset = datasets.ImageFolder(root="celeb_dataset", transform=transforms)
 loader = DataLoader(
     dataset,
     batch_size=BATCH_SIZE,
